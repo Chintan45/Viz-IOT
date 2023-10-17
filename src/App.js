@@ -2,6 +2,7 @@ import React, {useState,useEffect, useMemo} from 'react';
 import './App.css';
 import Whitehat from './Whitehat';
 import WhiteHatStats from './WhiteHatStats'
+import WhitehatBlank from './WhitehatBlank';
 import Blackhat from './Blackhat';
 import BlackHatStats from './BlackHatStats';
 import * as d3 from 'd3';
@@ -90,6 +91,13 @@ function App() {
               </div>
               <div style={{'height': 'calc(100% - 2em)','width': '50%','maxWidth': '60em','marginLeft':'25%'}}>
                 <WhiteHatStats
+                  data={gunData}
+                  ToolTip={ToolTip}
+                  brushedState={brushedState}
+                  setBrushedState={setBrushedState}
+                  zoomedState={zoomedState}
+                />     
+                <WhitehatBlank
                   data={gunData}
                   ToolTip={ToolTip}
                   brushedState={brushedState}
