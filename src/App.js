@@ -11,7 +11,7 @@ import * as d3 from 'd3';
 function App() {
 
   //state deciding if we are looking at the blackhat or whitehat visualization
-  const [viewToggle, setViewToggle] = useState('blackhat');
+  const [viewToggle, setViewToggle] = useState('whitehat');
 
   //state for the data, since it loads asynchronously
   const [map, setMap] = useState();
@@ -60,14 +60,16 @@ function App() {
     
         return (
           <>
-            <div style={{'width':'100%','height':'50%','display':'inline-block'}}>
-              <div style={{'height': '100%','width':'calc(100% - 35em)','display':'inline-block', 'border':'1px solid black'}}>
+            <div style={{'width':'calc(100% - 2em)','height':'calc(100% - 2em)','display':'flex', 'flexDirection': 'column', 'marginLeft': '1.5em'}}>
+              <div style={{'height': '100%','width':'calc(100% - 2em)', 'display':'flex', 'justifyContent':'space-between'}}>
+                  <div style={{ 'height': '100%', 'width':'calc(100% - 25em)', 'border':'1px solid black'}}> </div>
+                  <div style={{ 'height': '100%', 'width':'calc(100% - 25em)', 'border':'1px solid black'}}> </div>
+                  <div style={{ 'height': '100%', 'width':'calc(100% - 25em)', 'border':'1px solid black'}}> </div>
               </div>
-              <div style={{'height': '100%','width':'calc(100% - 35em)', 'display':'inline-block', 'justifyContent':'space-between'}}>
-                <div style={{'height': '100%','width':'100%', 'display':'flex', 'justifyContent':'space-between'}}>
+              <div style={{'height': '100%','width':'calc(100% - 2em)', 'display':'flex', 'justifyContent':'space-between'}}>
                   <div style={{ 'height': '100%', 'width':'calc(100% - 25em)', 'border':'1px solid black'}}> </div>
                   <div style={{ 'height': '100%', 'width':'calc(100% - 25em)', 'border':'1px solid black'}}> </div>
-                </div>
+                  <div style={{ 'height': '100%', 'width':'calc(100% - 25em)', 'border':'1px solid black'}}> </div>
               </div>
             </div>
           </>
