@@ -29,7 +29,18 @@ export default function BoxPlot(props) {
   useEffect(() => {
     if (boxPlotData) {
 
+      // Filter boxPlotData based on selectedAttacks
+      // const filteredData = boxPlotData.filter(d => props.selectedAttacks.includes(d.label));
+      const selectedAttacks = props.selectedAttacks && props.selectedAttacks.length > 0
+      ? props.selectedAttacks
+      : boxPlotData.map(d => d.label);
+
+      // console.log("SelectedAttacks: ", selectedAttacks)
+      const filteredData = boxPlotData.filter(d => selectedAttacks.includes(d.label));
+
       d3.select("#boxplot_chart").select("svg").remove();
+
+      // console.log("box plot props: ", props.selectedAttacks)
 
       var svg = d3.select("#boxplot_chart")
         .append("svg")
@@ -37,7 +48,8 @@ export default function BoxPlot(props) {
         .attr("height", 420);
 
       const xScale = d3.scaleBand()
-        .domain(boxPlotData.map(d => d.label))
+        // .domain(boxPlotData.map(d => d.label))
+        .domain(filteredData.map(d => d.label))
         .range([80, 650])
         .padding(0.9);
 
@@ -52,7 +64,8 @@ export default function BoxPlot(props) {
       svg.select(".domain").remove(); // Remove the axis line
 
       const yScale = d3.scaleLinear()
-        .domain([0, d3.max(boxPlotData.flatMap(d => d.Magnitude))])
+        // .domain([0, d3.max(boxPlotData.flatMap(d => d.Magnitude))])
+        .domain([0, d3.max(filteredData.flatMap(d => d.Magnitude))])
         .range([300, 120]);
 
       const yAxis = d3.axisLeft(yScale).ticks(5);
@@ -62,7 +75,8 @@ export default function BoxPlot(props) {
         .call(yAxis);
 
       svg.selectAll(".box")
-        .data(boxPlotData)
+        // .data(boxPlotData)
+        .data(filteredData, d => d.label)
         .enter()
         .append("rect")
         .attr("class", "box")
@@ -75,7 +89,8 @@ export default function BoxPlot(props) {
         .attr("stroke-width", 1);
 
       svg.selectAll(".whisker")
-        .data(boxPlotData)
+        // .data(boxPlotData)
+        .data(filteredData)
         .enter()
         .append("line")
         .attr("class", "whisker")
@@ -87,7 +102,8 @@ export default function BoxPlot(props) {
         .attr("stroke-width", 1);
 
       svg.selectAll(".upperWhisker")
-        .data(boxPlotData)
+        // .data(boxPlotData)
+        .data(filteredData)
         .enter()
         .append("line")
         .attr("class", "upperWhisker")
@@ -99,7 +115,8 @@ export default function BoxPlot(props) {
         .attr("stroke-width", 2);
 
       svg.selectAll(".lowerWhisker")
-        .data(boxPlotData)
+        // .data(boxPlotData)
+        .data(filteredData)
         .enter()
         .append("line")
         .attr("class", "lowerWhisker")
@@ -111,7 +128,8 @@ export default function BoxPlot(props) {
         .attr("stroke-width", 2);
 
       svg.selectAll(".median")
-        .data(boxPlotData)
+        // .data(boxPlotData)
+        .data(filteredData)
         .enter()
         .append("line")
         .attr("class", "median")
@@ -137,7 +155,7 @@ export default function BoxPlot(props) {
         .style("font-size", "16px")
         .text("Box Plot by Label");
     }
-  }, [boxPlotData]);
+  }, [boxPlotData, props.selectedAttacks]);
 
   return (
     <div id='boxplot_chart'></div>

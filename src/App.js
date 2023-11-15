@@ -58,10 +58,14 @@ function App() {
             <div style={{'width':'calc(100% - 2em)','height':'calc(100% - 2em)','display':'flex', 'flexDirection': 'column', 'marginLeft': '1.5em'}}>
               <div style={{'height': '100%','width':'calc(100% - 2em)', 'display':'flex', 'justifyContent':'space-between'}}>
                   <div style={{ 'height': '100%', 'width':'calc(100% - 25em)', 'border':'1px solid black'}}>
-                    <Boxplot />
+                    <Boxplot 
+                      selectedAttacks = {selectedAttacks}
+                    />
                   </div>
                   <div style={{ 'height': '100%', 'width':'calc(100% - 25em)', 'border':'1px solid black'}}> 
-                    <Violinplot />
+                    <Violinplot 
+                      selectedAttacks = {selectedAttacks}
+                    />
                   </div>
                     
                   <div style={{ 'height': '100%', 'width':'calc(100% - 25em)', 'border':'1px solid black'}}> </div>

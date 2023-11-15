@@ -22,9 +22,21 @@ export default function ViolinPlot(props) {
 
     d3.json('JSON/violin-plot_Duration_data.json').then((data) => {
 
+      // console.log("Raw Data: ", data)
+
+      // Filter boxPlotData based on selectedAttacks
+      // const filteredData = boxPlotData.filter(d => props.selectedAttacks.includes(d.label));
+      const selectedAttacks = props.selectedAttacks && props.selectedAttacks.length > 0
+      ? props.selectedAttacks
+      : data.map(d => d.label);
+
+      // console.log("SelectedAttacks: ", selectedAttacks)
+      const filteredData = data.filter(d => selectedAttacks.includes(d.label));
+
       // Build and Show the Y scale
       var y = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d3.max(d.Duration))])
+        // .domain([0, d3.max(data, d => d3.max(d.Duration))])
+        .domain([0, d3.max(filteredData, d => d3.max(d.Duration))])
         .range([height, 0]);
 
       svg.append("g").call(d3.axisLeft(y));
@@ -32,7 +44,7 @@ export default function ViolinPlot(props) {
       // Build and Show the X scale
       var x = d3.scaleBand()
         .range([0, width])
-        .domain(data.map(d => d.label))
+        .domain(filteredData.map(d => d.label))
         .padding(0.5);
 
       svg.append("g")
@@ -49,7 +61,7 @@ export default function ViolinPlot(props) {
         .value(d => d);
 
       // Compute the binning for each group of the dataset
-      var sumstat = data.map(function (group) {
+      var sumstat = filteredData.map(function (group) {
         return {
           key: group.label,
           value: histogram(group.Duration)
