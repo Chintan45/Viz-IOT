@@ -28,16 +28,17 @@ export default function BoxPlot(props) {
 
   useEffect(() => {
     if (boxPlotData) {
-      const svg = d3.select("#boxplot_chart")
+
+      d3.select("#boxplot_chart").select("svg").remove();
+
+      var svg = d3.select("#boxplot_chart")
         .append("svg")
         .attr("width", 700)
         .attr("height", 420);
 
-      svg.selectAll("*").remove();
-
       const xScale = d3.scaleBand()
         .domain(boxPlotData.map(d => d.label))
-        .range([80, 680])
+        .range([80, 650])
         .padding(0.9);
 
       svg.append("g")
@@ -46,6 +47,9 @@ export default function BoxPlot(props) {
         .selectAll("text") // Select all text elements for customization
         .style("text-anchor", "end")  // Align text to the end of the tick
         .attr("transform", "rotate(-45) translate(-5, -5)"); // Rotate the text for better visibility and adjust translation
+
+      // Remove ticks at the extremes of the x-axis
+      svg.select(".domain").remove(); // Remove the axis line
 
       const yScale = d3.scaleLinear()
         .domain([0, d3.max(boxPlotData.flatMap(d => d.Magnitude))])
@@ -121,7 +125,7 @@ export default function BoxPlot(props) {
       svg.append("line")
         .attr("x1", 50)
         .attr("y1", 300)
-        .attr("x2", 400)
+        .attr("x2", 650)
         .attr("y2", 300)
         .attr("stroke", "black")
         .attr("stroke-width", 1);
