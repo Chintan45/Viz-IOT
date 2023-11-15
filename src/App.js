@@ -45,18 +45,6 @@ function App() {
     { value: 'Backdoor_Malware', label: 'Backdoor Malware' },
   ];
 
-//   ['DDoS-SynonymousIP_Flood' 'DoS-TCP_Flood' 'DDoS-RSTFINFlood'
-//  'DDoS-ICMP_Flood' 'Mirai-udpplain' 'DDoS-SYN_Flood' 'DDoS-TCP_Flood'
-//  'DDoS-PSHACK_Flood' 'Mirai-greeth_flood' 'Recon-HostDiscovery'
-//  'DDoS-UDP_Flood' 'BenignTraffic' 'MITM-ArpSpoofing' 'DoS-UDP_Flood'
-//  'DDoS-UDP_Fragmentation' 'DoS-HTTP_Flood' 'DoS-SYN_Flood'
-//  'DDoS-ICMP_Fragmentation' 'Recon-OSScan' 'DNS_Spoofing'
-//  'DDoS-ACK_Fragmentation' 'Mirai-greip_flood' 'Recon-PortScan'
-//  'VulnerabilityScan' 'DDoS-HTTP_Flood' 'XSS' 'DDoS-SlowLoris'
-//  'CommandInjection' 'Recon-PingSweep' 'BrowserHijacking'
-//  'DictionaryBruteForce' 'SqlInjection' 'Uploading_Attack'
-//  'Backdoor_Malware']
-
   const [selectedAttacks, setSelectedAttacks] = useState([]);
 
   const handleAttackChange = (selectedOptions) => {
@@ -64,7 +52,7 @@ function App() {
   };
 
   //called to draw home screen
-  function Home(){
+  function Home({selectedAttacks}){
         return (
           <>
             <div style={{'width':'calc(100% - 2em)','height':'calc(100% - 2em)','display':'flex', 'flexDirection': 'column', 'marginLeft': '1.5em'}}>
@@ -80,7 +68,9 @@ function App() {
               </div>
               <div style={{'height': '100%','width':'calc(100% - 2em)', 'display':'flex', 'justifyContent':'space-between'}}>
                   <div style={{ 'height': '100%', 'width':'calc(100% - 25em)', 'border':'1px solid black'}}>
-                    <RadarChart />
+                    <RadarChart
+                      selectedAttacks = {selectedAttacks}
+                    />
                   </div>
                   <div style={{ 'height': '100%', 'width':'calc(100% - 25em)', 'border':'1px solid black'}}> </div>
                   <div style={{ 'height': '100%', 'width':'calc(100% - 25em)', 'border':'1px solid black'}}> </div>
@@ -104,7 +94,9 @@ function App() {
             />
           </div>
         </div>
-        <Home />
+        <Home
+          selectedAttacks={[...selectedAttacks.map(attack => attack.value)]}
+        />
       </div>
     </div>
   );
