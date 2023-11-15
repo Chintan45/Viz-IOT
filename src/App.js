@@ -1,10 +1,12 @@
 import React, {useState,useEffect, useMemo} from 'react';
 import './App.css';
-import Whitehat from './Whitehat';
-import WhiteHatStats from './WhiteHatStats'
-import WhitehatBlank from './WhitehatBlank';
-import Blackhat from './Blackhat';
-import BlackHatStats from './BlackHatStats';
+// import Whitehat from './Whitehat';
+// import WhiteHatStats from './WhiteHatStats'
+// import WhitehatBlank from './WhitehatBlank';
+// import Blackhat from './Blackhat';
+// import BlackHatStats from './BlackHatStats';
+import Boxplot from './boxplot';
+import Violinplot from './violin_plot';
 import * as d3 from 'd3';
 
 
@@ -29,30 +31,30 @@ function App() {
 
   //load map contours
   //react looks into the '/public' folder by default
-  async function fetchMap(){
-    fetch('us-states.geojson').then(paths=>{
-      paths.json().then(data=>{
-        setMap(data);
-      })
-    })
-  }
+  // async function fetchMap(){
+  //   fetch('us-states.geojson').then(paths=>{
+  //     paths.json().then(data=>{
+  //       setMap(data);
+  //     })
+  //   })
+  // }
 
-  //fetch gun data and attach a timestamp to make sorting dates easier for filters
-  async function fetchGunData(){
-    fetch('processed_gundeaths_data.json').then(d => {
-      d.json().then(gd=>{
-        console.log('gundata',gd)
-        setGunData(gd);
-      })
-    })
-  }
+  // //fetch gun data and attach a timestamp to make sorting dates easier for filters
+  // async function fetchGunData(){
+  //   fetch('processed_gundeaths_data.json').then(d => {
+  //     d.json().then(gd=>{
+  //       console.log('gundata',gd)
+  //       setGunData(gd);
+  //     })
+  //   })
+  // }
 
 
   //fetch data, called only once
-  useEffect(()=>{
-    fetchMap();
-    fetchGunData()
-  },[])
+  // useEffect(()=>{
+  //   fetchMap();
+  //   fetchGunData()
+  // },[])
 
  
   //called to draw the whitehat visualization
@@ -62,8 +64,13 @@ function App() {
           <>
             <div style={{'width':'calc(100% - 2em)','height':'calc(100% - 2em)','display':'flex', 'flexDirection': 'column', 'marginLeft': '1.5em'}}>
               <div style={{'height': '100%','width':'calc(100% - 2em)', 'display':'flex', 'justifyContent':'space-between'}}>
+                  <div style={{ 'height': '100%', 'width':'calc(100% - 25em)', 'border':'1px solid black'}}>
+                    <Boxplot>
+                    </Boxplot>
+                  </div>
                   <div style={{ 'height': '100%', 'width':'calc(100% - 25em)', 'border':'1px solid black'}}> </div>
-                  <div style={{ 'height': '100%', 'width':'calc(100% - 25em)', 'border':'1px solid black'}}> </div>
+                    <Violinplot>
+                    </Violinplot>
                   <div style={{ 'height': '100%', 'width':'calc(100% - 25em)', 'border':'1px solid black'}}> </div>
               </div>
               <div style={{'height': '100%','width':'calc(100% - 2em)', 'display':'flex', 'justifyContent':'space-between'}}>
@@ -77,58 +84,58 @@ function App() {
       }
 
   //function for a simpler chloropleth map
-  function makeBlackHat(){
+  // function makeBlackHat(){
 
-    return (
-      <>
-        <div style={{'width':'100%','height':'50%','display':'inline-block'}}>
-          <div 
-            style={{'height': '100%','width':'calc(100% - 15em)','display':'inline-block'}}
-          >
-              <Blackhat
-                map={map}
-                data={gunData}
-                ToolTip={ToolTip}
-                zoomedState={zoomedState}
-                setSelectedStuff={setSelectedStuff}
-                setZoomedState={setZoomedState}
-                brushedState={brushedState}
-                setBrushedState={setBrushedState}
-              />
-          </div>
-          <div 
-            className={'shadow'}
-            style={{'height': '100%','width':'14em','display':'inline-block','verticalAlign':'text-bottom'}}
-          >
-            <h1>{'Instructions'}</h1>
-            <p>{'Click on each state to zoom and unzoom'}</p>
-          </div>
-        </div>
-        <div style={{'height': '49%','width':'99%'}}>
-          <div className={'title'} 
-            style={{'height':'2em','width':'100%','fontWeight':'bold','fontFamily':'Georgia'}}
-          >
-            {'Gun Deaths'}
-          </div>
-          <div style={{'height': 'calc(100% - 2em)','width': '50%','maxWidth': '60em','marginLeft':'25%'}}>
-            <BlackHatStats
-              data={gunData}
-              ToolTip={ToolTip}
-            />     
-          </div>   
-        </div>
-      </>
-    )
-  }
+  //   return (
+  //     <>
+  //       <div style={{'width':'100%','height':'50%','display':'inline-block'}}>
+  //         <div 
+  //           style={{'height': '100%','width':'calc(100% - 15em)','display':'inline-block'}}
+  //         >
+  //             <Blackhat
+  //               map={map}
+  //               data={gunData}
+  //               ToolTip={ToolTip}
+  //               zoomedState={zoomedState}
+  //               setSelectedStuff={setSelectedStuff}
+  //               setZoomedState={setZoomedState}
+  //               brushedState={brushedState}
+  //               setBrushedState={setBrushedState}
+  //             />
+  //         </div>
+  //         <div 
+  //           className={'shadow'}
+  //           style={{'height': '100%','width':'14em','display':'inline-block','verticalAlign':'text-bottom'}}
+  //         >
+  //           <h1>{'Instructions'}</h1>
+  //           <p>{'Click on each state to zoom and unzoom'}</p>
+  //         </div>
+  //       </div>
+  //       <div style={{'height': '49%','width':'99%'}}>
+  //         <div className={'title'} 
+  //           style={{'height':'2em','width':'100%','fontWeight':'bold','fontFamily':'Georgia'}}
+  //         >
+  //           {'Gun Deaths'}
+  //         </div>
+  //         <div style={{'height': 'calc(100% - 2em)','width': '50%','maxWidth': '60em','marginLeft':'25%'}}>
+  //           <BlackHatStats
+  //             data={gunData}
+  //             ToolTip={ToolTip}
+  //           />     
+  //         </div>   
+  //       </div>
+  //     </>
+  //   )
+  // }
 
-  //toggle which visualization we're looking at based on the "viewToggle" state
+  // //toggle which visualization we're looking at based on the "viewToggle" state
   const hat = ()=>{
     if(viewToggle === 'whitehat'){
       return makeWhiteHat();
     }
-    else{
-      return makeBlackHat();
-    }
+    // else{
+    //   return makeBlackHat();
+    // }
   }
 
   return (
@@ -157,39 +164,39 @@ function App() {
 }
 
 
-class ToolTip {
-  static moveTTip(tTip, tipX, tipY){
-    var tipBBox = tTip.node().getBoundingClientRect();
-    while(tipBBox.width + tipX > window.innerWidth){
-        tipX = tipX - 10 ;
-    }
-    while(tipBBox.height + tipY > window.innerHeight){
-        tipY = tipY - 10 ;
-    }
-    tTip.style('left', tipX + 'px')
-        .style('top', tipY + 'px')
-        .style('visibility', 'visible')
-        .style('z-index', 1000);
-  }
+// class ToolTip {
+//   static moveTTip(tTip, tipX, tipY){
+//     var tipBBox = tTip.node().getBoundingClientRect();
+//     while(tipBBox.width + tipX > window.innerWidth){
+//         tipX = tipX - 10 ;
+//     }
+//     while(tipBBox.height + tipY > window.innerHeight){
+//         tipY = tipY - 10 ;
+//     }
+//     tTip.style('left', tipX + 'px')
+//         .style('top', tipY + 'px')
+//         .style('visibility', 'visible')
+//         .style('z-index', 1000);
+//   }
 
-  static moveTTipEvent(tTip, event){
-      var tipX = event.pageX + 30;
-      var tipY = event.pageY -20;
-      this.moveTTip(tTip,tipX,tipY);
-  }
+//   static moveTTipEvent(tTip, event){
+//       var tipX = event.pageX + 30;
+//       var tipY = event.pageY -20;
+//       this.moveTTip(tTip,tipX,tipY);
+//   }
 
 
-  static hideTTip(tTip){
-      tTip.style('visibility', 'hidden')
-  }
+//   static hideTTip(tTip){
+//       tTip.style('visibility', 'hidden')
+//   }
 
-  static addTTipCanvas(tTip, className, width, height){
-      tTip.selectAll('svg').selectAll('.'+className).remove();
-      let canvas = tTip.append('svg').attr('class',className)
-          .attr('height',height).attr('width',width)
-          .style('background','white');
-      return canvas
-  }
-}
+//   static addTTipCanvas(tTip, className, width, height){
+//       tTip.selectAll('svg').selectAll('.'+className).remove();
+//       let canvas = tTip.append('svg').attr('class',className)
+//           .attr('height',height).attr('width',width)
+//           .style('background','white');
+//       return canvas
+//   }
+// }
 
 export default App;
