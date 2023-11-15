@@ -37,11 +37,25 @@ export default function BoxPlot(props) {
 
       const xScale = d3.scaleBand()
         .domain(boxPlotData.map(d => d.label))
-        .range([120, 680]);
+        .range([80, 680])
+        .padding(0.9);
+
+      svg.append("g")
+        .attr("transform", "translate(0, 300)")
+        .call(d3.axisBottom(xScale))
+        .selectAll("text") // Select all text elements for customization
+        .style("text-anchor", "end")  // Align text to the end of the tick
+        .attr("transform", "rotate(-45) translate(-5, -5)"); // Rotate the text for better visibility and adjust translation
 
       const yScale = d3.scaleLinear()
         .domain([0, d3.max(boxPlotData.flatMap(d => d.Magnitude))])
         .range([300, 120]);
+
+      const yAxis = d3.axisLeft(yScale).ticks(5);
+
+      svg.append("g")
+        .attr("transform", "translate(50, 0)")
+        .call(yAxis);
 
       svg.selectAll(".box")
         .data(boxPlotData)
@@ -105,30 +119,12 @@ export default function BoxPlot(props) {
         .attr("stroke-width", 1);
 
       svg.append("line")
-        .attr("x1", 100)
+        .attr("x1", 50)
         .attr("y1", 300)
-        .attr("x2", 700)
+        .attr("x2", 400)
         .attr("y2", 300)
         .attr("stroke", "black")
         .attr("stroke-width", 1);
-
-      const yAxis = d3.axisLeft(yScale).ticks(5);
-
-      svg.append("g")
-        .attr("transform", "translate(100, 0)")
-        .call(yAxis);
-
-      svg.selectAll(".x-label")
-        .data(boxPlotData)
-        .enter()
-        .append("text")
-        .attr("class", "x-label")
-        .text(d => d.label)
-        .attr("x", d => xScale(d.label))
-        .attr("y", 370)
-        .attr("text-anchor", "middle")
-        .style("font-size", "10px")
-        .attr("transform", d => `rotate(-90, ${xScale(d.label)}, 370)`);
 
       svg.append("text")
         .attr("x", 400)
