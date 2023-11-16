@@ -17,7 +17,7 @@ export default function RadarChart3(props){
   let attacks = [];
 
   if (props.selectedAttacks && props.selectedAttacks.length > 0) {
-    attacks = props.selectedAttacks.slice(0, 4); // Keep only the first 4 attacks
+    attacks = props.selectedAttacks.slice(0, 5); // Keep only the first 5 attacks
   } else {
     attacks = ['DDoS-ICMP_Flood', 'DDoS-UDP_Flood'];
   }
@@ -388,7 +388,7 @@ export default function RadarChart3(props){
   return (
     <div>
       <h3>Attribute contribution over attack</h3>
-      <p>(Max 4 attacks can be visualized)</p>
+      <p>(Max 5 attacks can be visualized)</p>
       <div id="radar_chart3">
 
       </div>
