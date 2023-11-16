@@ -16,7 +16,7 @@ function App() {
     { value: "Recon-OSScan", label: "Recon OS Scan" },
     { value: "DNS_Spoofing", label: "DNS Spoofing" },
     // { value: "VulnerabilityScan", label: "Vulnerability Scan" },
-    { value: "Mirai-udpplain", label: "Mirai UDP Plain" }
+    { value: "Mirai-udpplain", label: "Mirai UDP Plain" },
   ];
 
   const [selectedAttacks, setSelectedAttacks] = useState(attackOptions);
@@ -121,8 +121,12 @@ function App() {
           }}
         >
           <div style={{ width: "65%" }}>
+            <h4 style={{ margin: "0.5rem 0", textAlign: "start" }}>
+              Attack Types:
+            </h4>
             <Select
               isMulti
+              placeholder="Type or Select and attack type"
               options={attackOptions}
               onChange={handleAttackChange}
               value={selectedAttacks}
