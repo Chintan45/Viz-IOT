@@ -65,6 +65,23 @@ export default function BoxPlot(props) {
         .style("text-anchor", "end") // Align text to the end of the tick
         .attr("transform", "rotate(-45) translate(-5, -5)"); // Rotate the text for better visibility and adjust translation
 
+      // x-axis label
+      svg.append("text")
+        .attr("transform", "translate(" + (700 / 2) + " ," + (400) + ")")
+        .style("text-anchor", "middle")
+        .style("font-size", "12px")
+        .text("Attack type");
+
+      // y-axis label
+      svg.append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 5)
+        .attr("x", 0 - (400 / 2))
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .style("font-size", "12px")
+        .text("Magnitude");
+
       // Remove ticks at the extremes of the x-axis
       svg.select(".domain").remove(); // Remove the axis line
 
@@ -72,7 +89,7 @@ export default function BoxPlot(props) {
         .scaleLinear()
         // .domain([0, d3.max(boxPlotData.flatMap(d => d.Magnitude))])
         .domain([0, d3.max(filteredData.flatMap((d) => d.Magnitude))])
-        .range([300, 120]);
+        .range([300, 50]);
 
       const yAxis = d3.axisLeft(yScale).ticks(5);
 
