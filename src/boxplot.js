@@ -47,19 +47,18 @@ export default function BoxPlot(props) {
       var svg = d3
         .select("#boxplot_chart")
         .append("svg")
-        .attr("width", 700)
-        .attr("height", 420);
+        .attr("width", 800)
+        .attr("height", 550);
 
       const xScale = d3
         .scaleBand()
-        // .domain(boxPlotData.map(d => d.label))
         .domain(filteredData.map((d) => d.label))
-        .range([80, 650])
+        .range([0, 750])
         .padding(1);
 
       svg
         .append("g")
-        .attr("transform", "translate(0, 300)")
+        .attr("transform", "translate(0, 400)")
         .call(d3.axisBottom(xScale))
         .selectAll("text") // Select all text elements for customization
         .style("text-anchor", "end") // Align text to the end of the tick
@@ -67,7 +66,7 @@ export default function BoxPlot(props) {
 
       // x-axis label
       svg.append("text")
-        .attr("transform", "translate(" + (700 / 2) + " ," + (400) + ")")
+        .attr("transform", "translate(" + (700 / 2) + " ," + (1000) + ")")
         .style("text-anchor", "middle")
         .style("font-size", "12px")
         .text("Attack type");
@@ -89,7 +88,7 @@ export default function BoxPlot(props) {
         .scaleLinear()
         // .domain([0, d3.max(boxPlotData.flatMap(d => d.Magnitude))])
         .domain([0, d3.max(filteredData.flatMap((d) => d.Magnitude))])
-        .range([300, 50]);
+        .range([400, 0]);
 
       const yAxis = d3.axisLeft(yScale).ticks(5);
 
