@@ -39,6 +39,13 @@ export default function LinePlot(props) {
 
       svg.append("g").call(d3.axisBottom(x)).attr("transform", "translate(0," + height + ")");
 
+      // X-axis label
+      svg
+        .append("text")
+        .attr("transform", "translate(" + width / 2 + " ," + (height + margin.top + 40) + ")")
+        .style("text-anchor", "middle")
+        .text("Duration");
+
       // Build and Show the Y scale
       var y = d3
         .scaleLinear()
@@ -46,6 +53,16 @@ export default function LinePlot(props) {
         .range([height, 0]);
 
       svg.append("g").call(d3.axisLeft(y));
+
+      // Y-axis label
+      svg
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 0 - margin.left - 5)
+        .attr("x", 0 - height / 2)
+        .attr("dy", "1em")
+        .style("text-anchor", "middle")
+        .text("Header Length");
 
       // Create a color scale
       var color = d3.scaleOrdinal(d3.schemeCategory10);
