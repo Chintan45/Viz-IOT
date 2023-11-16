@@ -4,7 +4,6 @@ import Boxplot from './boxplot';
 import Violinplot from './violin_plot';
 import * as d3 from 'd3';
 import RadarChart from './RadarPlot';
-import MosaicPlot from './mosaic_plot';
 import Select from 'react-select'
 
 function App() {
@@ -89,7 +88,7 @@ function App() {
     <div className="App">
       <div className={'body'} style={{'height':'calc(100vh - 2.5em)','width':'100vw'}}>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <div style={{ width: '30%'}}> 
+          <div style={{ width: '60%'}}> 
             <Select 
               isMulti
               options={attackOptions}
