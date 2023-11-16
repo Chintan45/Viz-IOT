@@ -47,7 +47,7 @@ export default function BoxPlot(props) {
       var svg = d3
         .select("#boxplot_chart")
         .append("svg")
-        .attr("width", 800)
+        .attr("width", 600)
         .attr("height", 550);
 
       const xScale = d3
@@ -65,17 +65,19 @@ export default function BoxPlot(props) {
         .attr("transform", "rotate(-45) translate(-5, -5)"); // Rotate the text for better visibility and adjust translation
 
       // x-axis label
-      svg.append("text")
-        .attr("transform", "translate(" + (700 / 2) + " ," + (1000) + ")")
+      svg
+        .append("text")
+        .attr("transform", "translate(" + 700 / 2 + " ," + 1000 + ")")
         .style("text-anchor", "middle")
         .style("font-size", "12px")
         .text("Attack type");
 
       // y-axis label
-      svg.append("text")
+      svg
+        .append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 5)
-        .attr("x", 0 - (400 / 2))
+        .attr("x", 0 - 400 / 2)
         .attr("dy", "1em")
         .style("text-anchor", "middle")
         .style("font-size", "12px")
@@ -165,22 +167,22 @@ export default function BoxPlot(props) {
         .attr("stroke", "purple")
         .attr("stroke-width", 1);
 
+      // X-axis line
       svg
         .append("line")
         .attr("x1", 50)
-        .attr("y1", 300)
+        .attr("y1", 400)
         .attr("x2", 650)
-        .attr("y2", 300)
+        .attr("y2", 400)
         .attr("stroke", "black")
         .attr("stroke-width", 1);
-
     }
   }, [boxPlotData, props.selectedAttacks]);
 
-  return(
+  return (
     <>
       <h4>Magnitude distribution of different attacks</h4>
       <div id="boxplot_chart"></div>
     </>
-  ) 
+  );
 }

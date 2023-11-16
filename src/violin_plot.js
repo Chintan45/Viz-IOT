@@ -6,7 +6,7 @@ export default function ViolinPlot(props) {
     // set the dimensions and margins of the graph
     var margin = { top: 10, right: 10, bottom: 120, left: 40 },
       width = 500 - margin.left - margin.right,
-      height = 300 - margin.top;
+      height = 400 - margin.top;
 
     // Remove existing SVG element
     d3.select("#d3-violin-plot svg").remove();
@@ -99,23 +99,28 @@ export default function ViolinPlot(props) {
             .y((d) => y(d.x0))
             .curve(d3.curveCatmullRom)
         );
-          // x-axis label
-          svg.append("text")
-          .attr("transform", "translate(" + (width / 2.2) + " ," + (height + 100) + ")")
-          .style("text-anchor", "middle")
-          .style("font-size", "12px")
-          .text("Attack type");
-  
-        // y-axis label
-        svg.append("text")
-          .attr("transform", "rotate(-90)")
-          .attr("y", -45)
-          .attr("x", 0 - (height / 2))
-          .attr("dy", "1.3em")
-          .style("text-anchor", "middle")
-          .style("font-size", "12px")
-          .text("Duration");
-    },[]);
+      // x-axis label
+      svg
+        .append("text")
+        .attr(
+          "transform",
+          "translate(" + width / 2.2 + " ," + (height + 100) + ")"
+        )
+        .style("text-anchor", "middle")
+        .style("font-size", "12px")
+        .text("Attack type");
+
+      // y-axis label
+      svg
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", -45)
+        .attr("x", 0 - height / 2)
+        .attr("dy", "1.3em")
+        .style("text-anchor", "middle")
+        .style("font-size", "12px")
+        .text("Duration");
+    }, []);
 
     // Cleanup function
     return () => {

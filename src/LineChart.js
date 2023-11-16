@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import * as d3 from 'd3';
+import React, { useEffect } from "react";
+import * as d3 from "d3";
 
 export default function LinePlot(props) {
   useEffect(() => {
     // set the dimensions and margins of the graph
     var margin = { top: 10, right: 10, bottom: 120, left: 40 },
-      width = 500 - margin.left - margin.right+ 300,
+      width = 700 - margin.left - margin.right,
       height = 300 - margin.top + 100;
 
     // Remove existing SVG element
@@ -37,12 +37,18 @@ export default function LinePlot(props) {
         .domain([0, d3.max(filteredData, (d) => d3.max(d.Duration))])
         .range([0, width]);
 
-      svg.append("g").call(d3.axisBottom(x)).attr("transform", "translate(0," + height + ")");
+      svg
+        .append("g")
+        .call(d3.axisBottom(x))
+        .attr("transform", "translate(0," + height + ")");
 
       // X-axis label
       svg
         .append("text")
-        .attr("transform", "translate(" + width / 2 + " ," + (height + margin.top + 40) + ")")
+        .attr(
+          "transform",
+          "translate(" + width / 2 + " ," + (height + margin.top + 40) + ")"
+        )
         .style("text-anchor", "middle")
         .text("Duration");
 
@@ -68,19 +74,26 @@ export default function LinePlot(props) {
       var color = d3.scaleOrdinal(d3.schemeCategory10);
 
       // Add a legend for each label
-      var legend = svg.selectAll(".legend")
+      var legend = svg
+        .selectAll(".legend")
         .data(filteredData.map((d) => d.label)) // Use the labels from your data
-        .enter().append("g")
+        .enter()
+        .append("g")
         .attr("class", "legend")
-        .attr("transform", (d, i) => `translate(${width - 220},${i * 30 + 200})`); // Adjusted the legend position
+        .attr(
+          "transform",
+          (d, i) => `translate(${width - 220},${i * 30 + 200})`
+        ); // Adjusted the legend position
 
-      legend.append("rect")
+      legend
+        .append("rect")
         .attr("x", 0)
         .attr("width", 18)
         .attr("height", 18)
         .style("fill", (d, i) => color(i)); // Use the color scale
 
-      legend.append("text")
+      legend
+        .append("text")
         .attr("x", 26)
         .attr("y", 9)
         .attr("dy", ".35em")
@@ -91,7 +104,12 @@ export default function LinePlot(props) {
       filteredData.forEach((dataset, i) => {
         svg
           .append("path")
-          .datum(dataset.Duration.map((d, j) => ({ x: d, y: dataset.Header_Length[j] })))
+          .datum(
+            dataset.Duration.map((d, j) => ({
+              x: d,
+              y: dataset.Header_Length[j],
+            }))
+          )
           .attr("fill", "none")
           .attr("stroke", color(i)) // Use the color scale
           .attr("stroke-width", 2)
