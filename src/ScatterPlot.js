@@ -134,7 +134,10 @@ const ScatterPlot = (props) => {
   }, [scatterPlotData]);
 
   return (
-    <svg ref={svgRef}></svg>
+    <>
+      <h4>Total size of different attacks by duration</h4>
+      <svg ref={svgRef}></svg>
+    </>
     // <canvas id="scatterPlotCanvas"></canvas>
   );
 };

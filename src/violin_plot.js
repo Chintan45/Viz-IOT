@@ -109,7 +109,7 @@ export default function ViolinPlot(props) {
 
   return (
     <div>
-      <h1>Violin Plot</h1>
+      <h4>Attack density at different durations</h4>
       <div id="d3-violin-plot"></div>
     </div>
   );

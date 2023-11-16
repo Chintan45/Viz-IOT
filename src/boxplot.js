@@ -158,15 +158,13 @@ export default function BoxPlot(props) {
         .attr("stroke", "black")
         .attr("stroke-width", 1);
 
-      svg
-        .append("text")
-        .attr("x", 400)
-        .attr("y", 20)
-        .attr("text-anchor", "middle")
-        .style("font-size", "16px")
-        .text("Box Plot by Label");
     }
   }, [boxPlotData, props.selectedAttacks]);
 
-  return <div id="boxplot_chart"></div>;
+  return(
+    <>
+      <h4>Magnitude distribution of different attacks</h4>
+      <div id="boxplot_chart"></div>
+    </>
+  ) 
 }

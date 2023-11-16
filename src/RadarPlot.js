@@ -19,7 +19,7 @@ export default function RadarChart3(props){
   if (props.selectedAttacks && props.selectedAttacks.length > 0) {
     attacks = props.selectedAttacks.slice(0, 5); // Keep only the first 5 attacks
   } else {
-    attacks = ['DDoS-ICMP_Flood', 'DDoS-UDP_Flood'];
+    attacks = ['DDoS-ICMP_Fragmentation', 'MITM-ArpSpoofing'];
   }
 
   async function fetchRadarData(){
@@ -37,7 +37,7 @@ export default function RadarChart3(props){
   const colors = ["blue", "orange", "yellow", "green"];
   const colorScheme = () => {
     if(attacks.length == 0) return colors.slice(0, 2)
-    else if (attacks.length >= colors.length) return colors.slice(0, colors.length)
+    // else if (attacks.length >= colors.length) return colors.slice(0, colors.length)
     else return colors.slice(0, attacks.length)
   }
 
@@ -387,8 +387,7 @@ export default function RadarChart3(props){
 
   return (
     <div>
-      <h3>Attribute contribution over attack</h3>
-      <p>(Max 5 attacks can be visualized)</p>
+      <h4>Attribute contribution over attack</h4>
       <div id="radar_chart3">
 
       </div>
