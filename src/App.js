@@ -15,8 +15,6 @@ function App() {
     { value: "Recon-OSScan", label: "Recon OS Scan" },
     { value: "DNS_Spoofing", label: "DNS Spoofing" },
     { value: "VulnerabilityScan", label: "Vulnerability Scan" },
-    { value: "CommandInjection", label: "Command Injection" },
-    { value: "BrowserHijacking", label: "Browser Hijacking" },
   ];
 
   const [selectedAttacks, setSelectedAttacks] = useState([]);
