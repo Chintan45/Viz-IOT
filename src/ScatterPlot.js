@@ -10,7 +10,7 @@ const ScatterPlot = (props) => {
       const response = await fetch("JSON/scatter-plot_Size_data.json");
       const data = await response.json();
 
-      console.log(data);
+      // console.log(data);
 
       setScatterPlotData(data);
     } catch (error) {

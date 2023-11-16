@@ -19,7 +19,7 @@ function App() {
     { value: "Mirai-udpplain", label: "Mirai UDP Plain" }
   ];
 
-  const [selectedAttacks, setSelectedAttacks] = useState([]);
+  const [selectedAttacks, setSelectedAttacks] = useState(attackOptions);
 
   const handleAttackChange = (selectedOptions) => {
     setSelectedAttacks(selectedOptions);
@@ -120,7 +120,7 @@ function App() {
             alignItems: "center",
           }}
         >
-          <div style={{ width: "60%" }}>
+          <div style={{ width: "65%" }}>
             <Select
               isMulti
               options={attackOptions}

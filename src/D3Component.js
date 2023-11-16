@@ -13,7 +13,7 @@ export default function D3Component(props){
     //you can use a hook like this to set up axes or things that don't require waiting for the data to load so it only draws once
     useEffect(()=>{
         if(svg !== undefined){
-            console.log('here',height,width)
+            // console.log('here',height,width)
         }
     },[svg])
 
@@ -21,7 +21,7 @@ export default function D3Component(props){
     useEffect(()=>{
         if(svg !== undefined & props.data !== undefined){
             //put code here
-            console.log('here',props.data,height,width);
+            // console.log('here',props.data,height,width);
         }
     },[svg,props.data]);
     //the stuff in brackets what we listen for chagnes too. If you want to re-draw on other property changes add them here

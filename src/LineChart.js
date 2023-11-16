@@ -131,8 +131,7 @@ export default function LinePlot(props) {
 
   return (
     <div>
-      <h4>Line Plot</h4>
-      <p>Header Length vs Duration for individual attacks</p>
+      <h4>Header Length vs Duration for individual attacks</h4>
       <div id="d3-line-plot"></div>
     </div>
   );

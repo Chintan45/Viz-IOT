@@ -47,7 +47,7 @@ export default function BoxPlot(props) {
       var svg = d3
         .select("#boxplot_chart")
         .append("svg")
-        .attr("width", 600)
+        .attr("width", 700)
         .attr("height", 550);
 
       const xScale = d3
@@ -67,7 +67,7 @@ export default function BoxPlot(props) {
       // x-axis label
       svg
         .append("text")
-        .attr("transform", "translate(" + 700 / 2 + " ," + 1000 + ")")
+        .attr("transform", "translate(" + 700 / 2 + " ," + 500 + ")")
         .style("text-anchor", "middle")
         .style("font-size", "12px")
         .text("Attack type");

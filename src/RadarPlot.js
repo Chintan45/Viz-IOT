@@ -124,7 +124,7 @@ export default function RadarChart3(props){
         }
         
         const data = transformData(attacks, dataset, columns, rScaleList);
-        console.log(data);
+        // console.log(data);
       
       var allAxis = (data[0].map(function(i, j){return i.axis}));	//Names of each axis
       var total = allAxis.length;					//The number of different axes
