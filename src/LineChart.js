@@ -5,8 +5,8 @@ export default function LinePlot(props) {
   useEffect(() => {
     // set the dimensions and margins of the graph
     var margin = { top: 10, right: 10, bottom: 120, left: 40 },
-      width = 500 - margin.left - margin.right,
-      height = 300 - margin.top;
+      width = 500 - margin.left - margin.right+ 300,
+      height = 300 - margin.top + 100;
 
     // Remove existing SVG element
     d3.select("#d3-line-plot svg").remove();
@@ -39,8 +39,6 @@ export default function LinePlot(props) {
 
       svg.append("g").call(d3.axisBottom(x)).attr("transform", "translate(0," + height + ")");
 
-      // svg.append("g").call(d3.axisBottom(x));
-
       // Build and Show the Y scale
       var y = d3
         .scaleLinear()
@@ -51,6 +49,26 @@ export default function LinePlot(props) {
 
       // Create a color scale
       var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+      // Add a legend for each label
+      var legend = svg.selectAll(".legend")
+        .data(filteredData.map((d) => d.label)) // Use the labels from your data
+        .enter().append("g")
+        .attr("class", "legend")
+        .attr("transform", (d, i) => `translate(${width - 220},${i * 30 + 200})`); // Adjusted the legend position
+
+      legend.append("rect")
+        .attr("x", 0)
+        .attr("width", 18)
+        .attr("height", 18)
+        .style("fill", (d, i) => color(i)); // Use the color scale
+
+      legend.append("text")
+        .attr("x", 26)
+        .attr("y", 9)
+        .attr("dy", ".35em")
+        .style("text-anchor", "start")
+        .text((d) => d);
 
       // Add a line for each dataset
       filteredData.forEach((dataset, i) => {
@@ -78,118 +96,9 @@ export default function LinePlot(props) {
 
   return (
     <div>
-      <h1>Line Plot</h1>
+      <h4>Line Plot</h4>
+      <p>Header Length vs Duration for individual attacks</p>
       <div id="d3-line-plot"></div>
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// --------
-// import React, { useState, useEffect, useRef } from "react";
-// import * as d3 from "d3";
-
-// const LineChart = (props) => {
-//   const chartRef = useRef();
-
-//   const [lineChartData, setLineChartData] = useState(null);
-
-//   async function fetchLineChartData() {
-//     try {
-//       const response = await fetch("JSON/line_plot_data.json");
-//       const data = await response.json();
-
-//       console.log(data);
-
-//       setLineChartData(data);
-//     } catch (error) {
-//       console.error("Error fetching data:", error);
-//     }
-//   }
-
-//   useEffect(() => {
-//     fetchLineChartData();
-//   }, []);
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await fetch("JSON/line_plot_data.json");
-//         const data = await response.json();
-//         drawChart(data);
-//       } catch (error) {
-//         console.error("Error fetching data:", error);
-//       }
-//     };
-
-//     fetchData();
-//   }, []);
-
-//   const drawChart = (data) => {
-//     const svg = d3.select(chartRef.current);
-//     svg.selectAll("*").remove(); // Clear existing content
-
-//     const margin = { top: 20, right: 20, bottom: 30, left: 50 };
-//     const width = 600 - margin.left - margin.right;
-//     const height = 400 - margin.top - margin.bottom;
-
-//     const xScale = d3
-//       .scaleLinear()
-//       .domain([0, d3.max(data, (entry) => d3.max(entry.Duration))])
-//       .range([0, width]);
-
-//     const yScale = d3
-//       .scaleLinear()
-//       .domain([0, d3.max(data, (entry) => d3.max(entry.Header_Length))])
-//       .range([height, 0]);
-
-//     const line = d3
-//       .line()
-//       .x((entry) => xScale(entry.Duration))
-//       .y((entry) => yScale(entry.Header_Length));
-
-//     const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
-
-//     data.forEach((entry, index) => {
-//       svg
-//         .append("path")
-//         .datum(entry)
-//         .attr("fill", "none")
-//         .attr("stroke", colorScale(index))
-//         .attr("stroke-width", 2)
-//         .attr("d", line);
-//     });
-
-//     svg
-//       .append("g")
-//       .attr("transform", `translate(0,${height})`)
-//       .call(d3.axisBottom(xScale));
-
-//     svg.append("g").call(d3.axisLeft(yScale));
-//   };
-
-//   return <svg ref={chartRef}></svg>;
-// };
-
-// export default LineChart;
