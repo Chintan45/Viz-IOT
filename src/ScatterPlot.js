@@ -107,16 +107,6 @@ const ScatterPlot = (props) => {
           );
       });
 
-      // Add legend heading
-      svg
-        .append("text")
-        .attr("x", width - 200)
-        .attr("y", 0)
-        .attr("dy", ".5em")
-        .style("text-anchor", "start")
-        .style("font-weight", "bold")
-        .text("Attack Type");
-
       // Add legend
       const legend = svg
         .selectAll(".legend")
@@ -124,10 +114,7 @@ const ScatterPlot = (props) => {
         .enter()
         .append("g")
         .attr("class", "legend")
-        .attr(
-          "transform",
-          (d, i) => `translate(${width - 200},${i * 20 + 20})`
-        ); // Adjusted legend position
+        .attr("transform", (d, i) => `translate(${width - 200},${i * 20})`); // Adjusted legend position
 
       legend
         .append("rect")

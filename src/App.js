@@ -6,6 +6,7 @@ import * as d3 from "d3";
 import RadarChart from "./RadarPlot";
 import Select from "react-select";
 import ScatterPlot from "./ScatterPlot";
+import LineChart from "./LineChart";
 
 function App() {
   const attackOptions = [
@@ -97,15 +98,8 @@ function App() {
                 border: "1px solid black",
               }}
             >
-              {" "}
+              <LineChart selectedAttacks={selectedAttacks} />
             </div>
-            <div
-              style={{
-                height: "100%",
-                width: "calc(100% - 25em)",
-                border: "1px solid black",
-              }}
-            ></div>
           </div>
         </div>
       </>
