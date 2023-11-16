@@ -4,9 +4,9 @@ import * as d3 from 'd3';
 export default function ViolinPlot(props) {
   useEffect(() => {
     // set the dimensions and margins of the graph
-    var margin = { top: 10, right: 10, bottom: 120, left: 80 },
+    var margin = { top: 10, right: 10, bottom: 120, left: 40 },
       width = 600 - margin.left - margin.right,
-      height = 300 - margin.top - margin.bottom;
+      height = 300 - margin.top;
 
     // Remove existing SVG element
     d3.select("#d3-violin-plot svg").remove();
@@ -22,10 +22,6 @@ export default function ViolinPlot(props) {
 
     d3.json('JSON/violin-plot_Duration_data.json').then((data) => {
 
-      // console.log("Raw Data: ", data)
-
-      // Filter boxPlotData based on selectedAttacks
-      // const filteredData = boxPlotData.filter(d => props.selectedAttacks.includes(d.label));
       const selectedAttacks = props.selectedAttacks && props.selectedAttacks.length > 0
       ? props.selectedAttacks
       : data.map(d => d.label);
