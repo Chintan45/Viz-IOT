@@ -388,6 +388,7 @@ export default function RadarChart3(props){
   return (
     <div>
       <h3>Attribute contribution over attack</h3>
+      <p>(Max 4 attacks can be visualized)</p>
       <div id="radar_chart3">
 
       </div>
