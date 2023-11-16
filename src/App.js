@@ -78,9 +78,6 @@ function App() {
                     />
                   </div>
                   <div style={{ 'height': '100%', 'width':'calc(100% - 25em)', 'border':'1px solid black'}}> </div>
-                    <MosaicPlot
-                      selectedAttacks = {selectedAttacks}
-                    />
                   <div style={{ 'height': '100%', 'width':'calc(100% - 25em)', 'border':'1px solid black'}}> </div>
               </div>
             </div>
