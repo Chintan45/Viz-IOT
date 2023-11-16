@@ -14,12 +14,18 @@ export default function RadarChart3(props){
   
   const [dataset, setDataset] = useState(null);
   const columns = ['Header_Length', 'Srate', 'rst_count', 'Radius', 'flow_duration', 'urg_count', 'Magnitude', 'syn_count'];
-  const attacks = ['DDoS-ICMP_Flood', 'DDoS-UDP_Flood'];
+  let attacks = [];
+
+  if (props.selectedAttacks && props.selectedAttacks.length > 0) {
+    attacks = props.selectedAttacks.slice(0, 4); // Keep only the first 4 attacks
+  } else {
+    attacks = ['DDoS-ICMP_Flood', 'DDoS-UDP_Flood'];
+  }
 
   async function fetchRadarData(){
     fetch('JSON/radar_data.json').then(d => {
       d.json().then(gd=>{
-        console.log('radarData',gd)
+        // console.log('radarData',gd)
         setDataset(gd);
       })
     })
@@ -28,9 +34,16 @@ export default function RadarChart3(props){
     fetchRadarData()
   },[])
 
+  const colors = ["blue", "orange", "yellow", "green"];
+  const colorScheme = () => {
+    if(attacks.length == 0) return colors.slice(0, 2)
+    else if (attacks.length >= colors.length) return colors.slice(0, colors.length)
+    else return colors.slice(0, attacks.length)
+  }
+
   var radar_color = d3
         .scaleOrdinal()
-        .range(["blue", "orange"]);
+        .range(colorScheme());
 
   var options = {
     w: radar_width,
@@ -100,7 +113,11 @@ export default function RadarChart3(props){
           for (const i in attacks) {
             const transformedArray = Object.entries(dataset[attacks[i]])
               .filter(([axis, value]) => columns.includes(axis))
-              .map(([axis, value]) => ({ axis, value, scale: rScaleList[axis] }));
+              .map(([axis, value]) => ({ 
+                axis, 
+                value: value > 30000 ? 30000 : value, 
+                scale: rScaleList[axis]
+              }));
             result.push(transformedArray);
           }
           return result;
@@ -154,17 +171,6 @@ export default function RadarChart3(props){
           .style("stroke", "#CDCDCD")
           .style("fill-opacity", cfg.opacityCircles)
           .style("filter" , "url(#glow)");
-
-          // var rScaleList = [
-          //   d3.scaleLinear().range([0, radius]).domain([0, scaleList[0][4]]), // "Header_Length"
-          //   d3.scaleLinear().range([0, radius]).domain([0, scaleList[1][4]]), // "Srate"
-          //   d3.scaleLog().range([0, radius]).domain([0.001, scaleList[2][4]]), // "rst_count":
-          //   d3.scaleLog().range([0, radius]).domain([0.001, scaleList[3][4]]), // "Radius"
-          //   d3.scaleLog().range([0, radius]).domain([0.001, scaleList[4][4]]), // "flow_duration":
-          //   d3.scaleLog().range([0, radius]).domain([0.001, scaleList[5][4]]), // "urg_count"
-          //   d3.scaleLog().range([0, radius]).domain([0.001, scaleList[6][4]]), // "Magnitude"
-          //   d3.scaleLog().range([0, radius]).domain([0.0001, scaleList[7][4]]), // "syn_count"
-          // ];
           
 
       //Create the straight lines radiating outward from the center
