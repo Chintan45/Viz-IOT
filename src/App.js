@@ -14,7 +14,8 @@ function App() {
     { value: "DDoS-ICMP_Fragmentation", label: "DDoS ICMP Fragmentation" },
     { value: "Recon-OSScan", label: "Recon OS Scan" },
     { value: "DNS_Spoofing", label: "DNS Spoofing" },
-    { value: "VulnerabilityScan", label: "Vulnerability Scan" },
+    // { value: "VulnerabilityScan", label: "Vulnerability Scan" },
+    { value: "Mirai-udpplain", label: "Mirai UDP Plain" }
   ];
 
   const [selectedAttacks, setSelectedAttacks] = useState([]);
