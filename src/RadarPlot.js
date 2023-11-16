@@ -10,14 +10,14 @@ import * as d3 from 'd3';
 export default function RadarChart3(props){
   var radar_margin = { top: 10, right: 0, bottom: 40, left: 0 },
   radar_width = 400,
-  radar_height = 300;
+  radar_height = 500;
   
   const [dataset, setDataset] = useState(null);
   const columns = ['Header_Length', 'Srate', 'rst_count', 'Radius', 'flow_duration', 'urg_count', 'Magnitude', 'syn_count'];
   let attacks = [];
 
   if (props.selectedAttacks && props.selectedAttacks.length > 0) {
-    attacks = props.selectedAttacks.slice(0, 5); // Keep only the first 5 attacks
+    attacks = props.selectedAttacks;
   } else {
     attacks = ['DDoS-ICMP_Fragmentation', 'MITM-ArpSpoofing'];
   }
@@ -34,7 +34,7 @@ export default function RadarChart3(props){
     fetchRadarData()
   },[])
 
-  const colors = ["blue", "orange", "yellow", "green"];
+  const colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b"];
   const colorScheme = () => {
     if(attacks.length == 0) return colors.slice(0, 2)
     // else if (attacks.length >= colors.length) return colors.slice(0, colors.length)
@@ -80,25 +80,25 @@ export default function RadarChart3(props){
   } //if
   var radius = Math.min(cfg.w/3, cfg.h/2.8); 	//Radius of the outermost circle
   const scaleList = React.useMemo(() => ({  
-      "Header_Length": [4000, 7500, 15000, 22500, 2112448.50],//"Header_Length"
-      "Srate": [0, 5000, 10000, 15000, 16000],//"Srate"
-      "rst_count": [0, 375, 750, 1125, 1500],//"rst_count"
-      "Radius": [0, 200, 400, 600, 800],//"Radius"
-      "flow_duration": [0, 175, 350, 525, 700],//"flow_duration"
-      "urg_count": [0, 100, 200, 300, 400],//"urg_count"
-      "Magnitude": [0, 12, 25, 36, 50],//"Magnitude"
-      "syn_count": [0, 0.5, 1, 1.5, 1]//"syn_count"
+      "Header_Length": [4000, 2112448.50],//"Header_Length"
+      "Srate": [0, 16000],//"Srate"
+      "rst_count": [0, 1500],//"rst_count"
+      "Radius": [0, 800],//"Radius"
+      "flow_duration": [0, 700],//"flow_duration"
+      "urg_count": [0, 400],//"urg_count"
+      "Magnitude": [0, 50],//"Magnitude"
+      "syn_count": [0, 1]//"syn_count"
     }), [])
 
   const rScaleList = React.useMemo(() => ({
-    "Header_Length": d3.scaleLinear().range([0, radius]).domain([0, scaleList['Header_Length'][4]]), // "Header_Length"
-    "Srate": d3.scaleLog().range([0, radius]).domain([100, scaleList['Srate'][4]]), // "Srate"
-    "rst_count": d3.scaleLog().range([0, radius]).domain([0.001, scaleList['rst_count'][4]]), // "rst_count":
-    "Radius": d3.scaleLinear().range([0, radius]).domain([100, scaleList['Radius'][4]]), // "Radius"
-    "flow_duration": d3.scaleLog().range([0, radius]).domain([0.001, scaleList['flow_duration'][4]]), // "flow_duration":
-    "urg_count": d3.scaleLog().range([0, radius]).domain([0.1, scaleList['urg_count'][4]]), // "urg_count"
-    "Magnitude": d3.scaleLinear().range([0, radius]).domain([10, scaleList['Magnitude'][4]]), // "Magnitude"
-    "syn_count": d3.scaleLinear().range([0, radius]).domain([0.001, scaleList['syn_count'][4]]), // "syn_count"
+    "Header_Length": d3.scaleLinear().range([0, radius]).domain([0, scaleList['Header_Length'][1]]), // "Header_Length"
+    "Srate": d3.scaleLog().range([0, radius]).domain([100, scaleList['Srate'][1]]), // "Srate"
+    "rst_count": d3.scaleLog().range([0, radius]).domain([0.001, scaleList['rst_count'][1]]), // "rst_count":
+    "Radius": d3.scaleLinear().range([0, radius]).domain([100, scaleList['Radius'][1]]), // "Radius"
+    "flow_duration": d3.scaleLog().range([0, radius]).domain([0.001, scaleList['flow_duration'][1]]), // "flow_duration":
+    "urg_count": d3.scaleLog().range([0, radius]).domain([0.1, scaleList['urg_count'][1]]), // "urg_count"
+    "Magnitude": d3.scaleLinear().range([0, radius]).domain([10, scaleList['Magnitude'][1]]), // "Magnitude"
+    "syn_count": d3.scaleLinear().range([0, radius]).domain([0.001, scaleList['syn_count'][1]]), // "syn_count"
   }), []);
 
   var legendData = attacks.map((attack, index) => ({
@@ -140,11 +140,11 @@ export default function RadarChart3(props){
       var rdr_svg = d3.select('#radar_chart3').append("svg");
       rdr_svg
         .attr("width",  400)
-        .attr("height", 320)
+        .attr("height", 520)
         .attr("class", "radar" + '#radar_chart3');
       //Append a g element		
       var g = rdr_svg.append("g")
-        .attr("transform", "translate(" + (cfg.w/2 + cfg.margin.left) + "," + cfg.h/2  + ")");
+        .attr("transform", "translate(" + (cfg.w/2 + cfg.margin.left) + "," + cfg.h/3  + ")");
 
       
       //Filter for the outside glow
@@ -376,7 +376,29 @@ export default function RadarChart3(props){
         });
       }//wrap	
       
+      const legend = rdr_svg.append('g')
+        .attr('class', 'legend')
+        .attr('transform', 'translate(' + (cfg.w/3) + ' , ' + (cfg.h - 130) +')'); // Adjust the position of the legend
 
+      const legendItems = legend.selectAll('.legend-item')
+        .data(legendData)
+        .enter()
+          .append('g')
+          .attr('class', 'legend-item')
+          .attr('transform', (d, i) => 'translate(0,' + (i * 20) + ')'); // Adjust vertical spacing between legend items
+
+      legendItems.append('rect')
+        .attr('x', 0)
+        .attr('width', 12)
+        .attr('height', 12)
+        .style('fill', d => d.color);
+
+      legendItems.append('text')
+        .attr('x', 20)
+        .attr('y', 10)
+        .text(d => d.name)
+        .attr('class', 'legend-text')
+        .style('font-size', '12px');
 
 
     }
@@ -389,8 +411,8 @@ export default function RadarChart3(props){
     <div>
       <h4>Attribute contribution over attack</h4>
       <div id="radar_chart3">
-
       </div>
+      <div id="radar_legends"></div>
     </div>
   );
 };
