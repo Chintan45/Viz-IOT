@@ -9,40 +9,14 @@ import ScatterPlot from "./ScatterPlot";
 
 function App() {
   const attackOptions = [
-    { value: "DDoS-SynonymousIP_Flood", label: "DDoS Synonymous IP Flood" },
-    { value: "DoS-TCP_Flood", label: "DoS TCP Flood" },
-    { value: "DDoS-RSTFINFlood", label: "DDoS RST FIN Flood" },
-    { value: "DDoS-ICMP_Flood", label: "DDoS ICMP Flood" },
-    { value: "Mirai-udpplain", label: "Mirai UDP Plain" },
-    { value: "DDoS-SYN_Flood", label: "DDoS SYN Flood" },
-    { value: "DDoS-TCP_Flood", label: "DDoS TCP Flood" },
-    { value: "DDoS-PSHACK_Flood", label: "DDoS PSH ACK Flood" },
-    { value: "Mirai-greeth_flood", label: "Mirai Greeth Flood" },
-    { value: "Recon-HostDiscovery", label: "Recon Host Discovery" },
-    { value: "DDoS-UDP_Flood", label: "DDoS UDP Flood" },
     { value: "BenignTraffic", label: "Benign Traffic" },
     { value: "MITM-ArpSpoofing", label: "MITM ARP Spoofing" },
-    { value: "DoS-UDP_Flood", label: "DoS UDP Flood" },
-    { value: "DDoS-UDP_Fragmentation", label: "DDoS UDP Fragmentation" },
-    { value: "DoS-HTTP_Flood", label: "DoS HTTP Flood" },
-    { value: "DoS-SYN_Flood", label: "DoS SYN Flood" },
     { value: "DDoS-ICMP_Fragmentation", label: "DDoS ICMP Fragmentation" },
     { value: "Recon-OSScan", label: "Recon OS Scan" },
     { value: "DNS_Spoofing", label: "DNS Spoofing" },
-    { value: "DDoS-ACK_Fragmentation", label: "DDoS ACK Fragmentation" },
-    { value: "Mirai-greip_flood", label: "Mirai Gre IP Flood" },
-    { value: "Recon-PortScan", label: "Recon Port Scan" },
     { value: "VulnerabilityScan", label: "Vulnerability Scan" },
-    { value: "DDoS-HTTP_Flood", label: "DDoS HTTP Flood" },
-    { value: "XSS", label: "Cross-Site Scripting (XSS)" },
-    { value: "DDoS-SlowLoris", label: "DDoS SlowLoris" },
     { value: "CommandInjection", label: "Command Injection" },
-    { value: "Recon-PingSweep", label: "Recon Ping Sweep" },
     { value: "BrowserHijacking", label: "Browser Hijacking" },
-    { value: "DictionaryBruteForce", label: "Dictionary Brute Force" },
-    { value: "SqlInjection", label: "SQL Injection" },
-    { value: "Uploading_Attack", label: "Uploading Attack" },
-    { value: "Backdoor_Malware", label: "Backdoor Malware" },
   ];
 
   const [selectedAttacks, setSelectedAttacks] = useState([]);
@@ -153,7 +127,7 @@ function App() {
             alignItems: "center",
           }}
         >
-          <div style={{ width: "30%" }}>
+          <div style={{ width: "60%" }}>
             <Select
               isMulti
               options={attackOptions}
