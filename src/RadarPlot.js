@@ -80,25 +80,25 @@ export default function RadarChart3(props){
   } //if
   var radius = Math.min(cfg.w/3, cfg.h/2.8); 	//Radius of the outermost circle
   const scaleList = React.useMemo(() => ({  
-      "Header_Length": [0, 7500, 15000, 22500, 30000],//"Header_Length"
-      "Srate": [0, 5000, 10000, 15000, 20000],//"Srate"
+      "Header_Length": [4000, 7500, 15000, 22500, 2112448.50],//"Header_Length"
+      "Srate": [0, 5000, 10000, 15000, 16000],//"Srate"
       "rst_count": [0, 375, 750, 1125, 1500],//"rst_count"
       "Radius": [0, 200, 400, 600, 800],//"Radius"
       "flow_duration": [0, 175, 350, 525, 700],//"flow_duration"
       "urg_count": [0, 100, 200, 300, 400],//"urg_count"
       "Magnitude": [0, 12, 25, 36, 50],//"Magnitude"
-      "syn_count": [0, 0.5, 1, 1.5, 2]//"syn_count"
+      "syn_count": [0, 0.5, 1, 1.5, 1]//"syn_count"
     }), [])
 
   const rScaleList = React.useMemo(() => ({
     "Header_Length": d3.scaleLinear().range([0, radius]).domain([0, scaleList['Header_Length'][4]]), // "Header_Length"
-    "Srate": d3.scaleLinear().range([0, radius]).domain([0, scaleList['Srate'][4]]), // "Srate"
+    "Srate": d3.scaleLog().range([0, radius]).domain([100, scaleList['Srate'][4]]), // "Srate"
     "rst_count": d3.scaleLog().range([0, radius]).domain([0.001, scaleList['rst_count'][4]]), // "rst_count":
-    "Radius": d3.scaleLog().range([0, radius]).domain([0.001, scaleList['Radius'][4]]), // "Radius"
+    "Radius": d3.scaleLinear().range([0, radius]).domain([100, scaleList['Radius'][4]]), // "Radius"
     "flow_duration": d3.scaleLog().range([0, radius]).domain([0.001, scaleList['flow_duration'][4]]), // "flow_duration":
-    "urg_count": d3.scaleLog().range([0, radius]).domain([0.001, scaleList['urg_count'][4]]), // "urg_count"
-    "Magnitude": d3.scaleLog().range([0, radius]).domain([0.001, scaleList['Magnitude'][4]]), // "Magnitude"
-    "syn_count": d3.scaleLog().range([0, radius]).domain([0.0001, scaleList['syn_count'][4]]), // "syn_count"
+    "urg_count": d3.scaleLog().range([0, radius]).domain([0.1, scaleList['urg_count'][4]]), // "urg_count"
+    "Magnitude": d3.scaleLinear().range([0, radius]).domain([10, scaleList['Magnitude'][4]]), // "Magnitude"
+    "syn_count": d3.scaleLinear().range([0, radius]).domain([0.001, scaleList['syn_count'][4]]), // "syn_count"
   }), []);
 
   var legendData = attacks.map((attack, index) => ({
@@ -115,7 +115,7 @@ export default function RadarChart3(props){
               .filter(([axis, value]) => columns.includes(axis))
               .map(([axis, value]) => ({ 
                 axis, 
-                value: value > 30000 ? 30000 : value, 
+                value: value, 
                 scale: rScaleList[axis]
               }));
             result.push(transformedArray);
