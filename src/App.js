@@ -4,6 +4,7 @@ import Boxplot from './boxplot';
 import Violinplot from './violin_plot';
 import * as d3 from 'd3';
 import RadarChart from './RadarPlot';
+import MosaicPlot from './mosaic_plot';
 import Select from 'react-select'
 
 function App() {
@@ -77,6 +78,9 @@ function App() {
                     />
                   </div>
                   <div style={{ 'height': '100%', 'width':'calc(100% - 25em)', 'border':'1px solid black'}}> </div>
+                    <MosaicPlot
+                      selectedAttacks = {selectedAttacks}
+                    />
                   <div style={{ 'height': '100%', 'width':'calc(100% - 25em)', 'border':'1px solid black'}}> </div>
               </div>
             </div>
