@@ -36,8 +36,8 @@ const ScatterPlot = (props) => {
       );
 
       // Set up dimensions and margins
-      const margin = { top: 40, right: 250, bottom: 50, left: 60 }; // Increased right margin
-      const width = 900 - margin.left - margin.right;
+      const margin = { top: 40, right: 50, bottom: 50, left: 60 }; // Increased right margin
+      const width = 500 - margin.left - margin.right;
       const height = 500 - margin.top - margin.bottom;
 
       // Create SVG container
@@ -110,8 +110,8 @@ const ScatterPlot = (props) => {
       // Add legend heading
       svg
         .append("text")
-        .attr("x", width + 10)
-        .attr("y", -20)
+        .attr("x", width - 200)
+        .attr("y", 0)
         .attr("dy", ".5em")
         .style("text-anchor", "start")
         .style("font-weight", "bold")
@@ -124,7 +124,10 @@ const ScatterPlot = (props) => {
         .enter()
         .append("g")
         .attr("class", "legend")
-        .attr("transform", (d, i) => `translate(${width + 10},${i * 20})`); // Adjusted legend position
+        .attr(
+          "transform",
+          (d, i) => `translate(${width - 200},${i * 20 + 20})`
+        ); // Adjusted legend position
 
       legend
         .append("rect")
@@ -144,10 +147,7 @@ const ScatterPlot = (props) => {
   }, [scatterPlotData]);
 
   return (
-    <svg
-      ref={svgRef}
-      style={{ border: "1px solid #aaa", borderRadius: "0.5rem" }}
-    ></svg>
+    <svg ref={svgRef}></svg>
     // <canvas id="scatterPlotCanvas"></canvas>
   );
 };
