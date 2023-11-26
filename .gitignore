@@ -1,4 +1,5 @@
 node_modules
 *.csv
 ./package-lock.json
-./python/JSON/*
+!./python/*.py
+./package-lock.json
