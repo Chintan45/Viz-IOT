@@ -89,7 +89,7 @@ export default function NetworkGraph(props){
         }
         
         function handleMouseOut() {
-          d3.select('.tooltip').remove();
+          d3.select('#network_graph').select('.tooltip').remove();
         }
 
         const node = network_svg.selectAll('.node')
