@@ -66,8 +66,32 @@ export default function NetworkGraph(props){
                 .append('line')
                 .attr('class', 'link')
                 .attr('stroke', '#aaa')
-                .attr('stroke-width', d => Math.sqrt(d.similarity) * 2);
+                .attr('stroke-width', d => Math.sqrt(d.similarity) * 2)
+                .on('mouseover', handleMouseOver)
+                .on('mouseout', handleMouseOut);
         
+        function handleMouseOver(event, d) {
+          const sourceAttack = d.source;
+          const targetAttack = d.target;
+          const similarity = d.similarity;
+
+          const tooltip = d3.select('#network_graph').append('div')
+            .attr('class', 'tooltip')
+            .style('position', 'absolute')
+            .style('background-color', 'rgba(255, 255, 255, 0.9)')
+            .style('padding', '8px')
+            .style('border', '1px solid #aaa')
+            .style('border-radius', '4px')
+            .html(`Cosine similarity between <strong>  ${sourceAttack.label} </strong> and <strong>${targetAttack.label}</strong><br>Similarity: ${similarity}`);
+        
+          tooltip.style('left', `${event.pageX}px`)
+            .style('top', `${event.pageY}px`);
+        }
+        
+        function handleMouseOut() {
+          d3.select('.tooltip').remove();
+        }
+
         const node = network_svg.selectAll('.node')
         .data(filteredData[0].nodes)
         .enter()
