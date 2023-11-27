@@ -7,6 +7,7 @@ import RadarChart from "./RadarPlot";
 import Select from "react-select";
 import ScatterPlot from "./ScatterPlot";
 import LineChart from "./LineChart";
+import NetworkGraph from "./Network";
 
 function App() {
   const attackOptions = [
@@ -19,7 +20,7 @@ function App() {
     { value: "Mirai-udpplain", label: "Mirai UDP Plain" },
     { value: "Mirai-greeth_flood", label: "Mirai Greeth Flood" },
     { value: "Mirai-greip_flood", label: "Mirai GreIP Flood" },
-    { value: "DDoS-ICMP_Flood", label: "Mirai ICMP Flood" }
+    { value: "DDoS-ICMP_Flood", label: "DDoS ICMP Flood" }
   ];
 // ['BenignTraffic', 'MITM-ArpSpoofing', 'DDoS-ICMP_Fragmentation', 'Recon-OSScan', 'DNS_Spoofing', 'Mirai-udpplain',  'Mirai-greeth_flood', 'Mirai-greip_flood', 'DDoS-ICMP_Flood']
   const [selectedAttacks, setSelectedAttacks] = useState(attackOptions);
@@ -93,7 +94,7 @@ function App() {
                 border: "1px solid black",
               }}
             >
-              <Boxplot selectedAttacks={selectedAttacks} />
+              <NetworkGraph selectedAttacks={selectedAttacks} />
             </div>
             <div
               style={{

@@ -1,0 +1,213 @@
+[{
+    "nodes": [
+        {
+            "label": "Mirai-udpplain"
+        },
+        {
+            "label": "Mirai-greeth_flood"
+        },
+        {
+            "label": "BenignTraffic"
+        },
+        {
+            "label": "MITM-ArpSpoofing"
+        },
+        {
+            "label": "DNS_Spoofing"
+        },
+        {
+            "label": "Mirai-greip_flood"
+        },
+        {
+            "label": "DDoS-ICMP_Flood"
+        },
+        {
+            "label": "Recon-OSScan"
+        },
+        {
+            "label": "DDoS-ICMP_Fragmentation"
+        }
+    ],
+    "links": [
+        {
+            "source": "BenignTraffic",
+            "target": "DDoS-ICMP_Flood",
+            "similarity": 0.11764988512277014
+        },
+        {
+            "source": "DDoS-ICMP_Flood",
+            "target": "MITM-ArpSpoofing",
+            "similarity": 0.1174520856838248
+        },
+        {
+            "source": "DDoS-ICMP_Flood",
+            "target": "Mirai-udpplain",
+            "similarity": 0.11745646609959819
+        },
+        {
+            "source": "DDoS-ICMP_Flood",
+            "target": "Mirai-greeth_flood",
+            "similarity": 0.9135040923658219
+        },
+        {
+            "source": "DDoS-ICMP_Flood",
+            "target": "DDoS-ICMP_Fragmentation",
+            "similarity": 0.4824362657212497
+        },
+        {
+            "source": "DDoS-ICMP_Flood",
+            "target": "DNS_Spoofing",
+            "similarity": 0.11761851980693888
+        },
+        {
+            "source": "DDoS-ICMP_Flood",
+            "target": "Mirai-greip_flood",
+            "similarity": 0.7980492462853481
+        },
+        {
+            "source": "DDoS-ICMP_Flood",
+            "target": "Recon-OSScan",
+            "similarity": 0.11892308156963476
+        },
+        {
+            "source": "BenignTraffic",
+            "target": "MITM-ArpSpoofing",
+            "similarity": 0.9999989501955739
+        },
+        {
+            "source": "BenignTraffic",
+            "target": "Mirai-udpplain",
+            "similarity": 0.9999989461165744
+        },
+        {
+            "source": "BenignTraffic",
+            "target": "Mirai-greeth_flood",
+            "similarity": 0.00985287743289172
+        },
+        {
+            "source": "BenignTraffic",
+            "target": "DDoS-ICMP_Fragmentation",
+            "similarity": 0.594146688032873
+        },
+        {
+            "source": "BenignTraffic",
+            "target": "DNS_Spoofing",
+            "similarity": 0.9999072925844793
+        },
+        {
+            "source": "BenignTraffic",
+            "target": "Mirai-greip_flood",
+            "similarity": 0.2107463999917746
+        },
+        {
+            "source": "BenignTraffic",
+            "target": "Recon-OSScan",
+            "similarity": 0.9999980217919839
+        },
+        {
+            "source": "MITM-ArpSpoofing",
+            "target": "Mirai-udpplain",
+            "similarity": 0.999999976119207
+        },
+        {
+            "source": "MITM-ArpSpoofing",
+            "target": "Mirai-greeth_flood",
+            "similarity": 0.009636120251183525
+        },
+        {
+            "source": "DDoS-ICMP_Fragmentation",
+            "target": "MITM-ArpSpoofing",
+            "similarity": 0.5940490914076711
+        },
+        {
+            "source": "DNS_Spoofing",
+            "target": "MITM-ArpSpoofing",
+            "similarity": 0.9999057972308454
+        },
+        {
+            "source": "MITM-ArpSpoofing",
+            "target": "Mirai-greip_flood",
+            "similarity": 0.21056280263823784
+        },
+        {
+            "source": "MITM-ArpSpoofing",
+            "target": "Recon-OSScan",
+            "similarity": 0.9999986804713918
+        },
+        {
+            "source": "Mirai-greeth_flood",
+            "target": "Mirai-udpplain",
+            "similarity": 0.009640918898579948
+        },
+        {
+            "source": "DDoS-ICMP_Fragmentation",
+            "target": "Mirai-udpplain",
+            "similarity": 0.5940512372419107
+        },
+        {
+            "source": "DNS_Spoofing",
+            "target": "Mirai-udpplain",
+            "similarity": 0.9999052577859785
+        },
+        {
+            "source": "Mirai-greip_flood",
+            "target": "Mirai-udpplain",
+            "similarity": 0.21056685520453053
+        },
+        {
+            "source": "Mirai-udpplain",
+            "target": "Recon-OSScan",
+            "similarity": 0.9999987050117044
+        },
+        {
+            "source": "DDoS-ICMP_Fragmentation",
+            "target": "Mirai-greeth_flood",
+            "similarity": 0.4577146513562147
+        },
+        {
+            "source": "DNS_Spoofing",
+            "target": "Mirai-greeth_flood",
+            "similarity": 0.009829309070662281
+        },
+        {
+            "source": "Mirai-greeth_flood",
+            "target": "Mirai-greip_flood",
+            "similarity": 0.8490435076542284
+        },
+        {
+            "source": "Mirai-greeth_flood",
+            "target": "Recon-OSScan",
+            "similarity": 0.011247452372888208
+        },
+        {
+            "source": "DDoS-ICMP_Fragmentation",
+            "target": "DNS_Spoofing",
+            "similarity": 0.594084799016017
+        },
+        {
+            "source": "DDoS-ICMP_Fragmentation",
+            "target": "Mirai-greip_flood",
+            "similarity": 0.5081875220855727
+        },
+        {
+            "source": "DDoS-ICMP_Fragmentation",
+            "target": "Recon-OSScan",
+            "similarity": 0.5947771404428849
+        },
+        {
+            "source": "DNS_Spoofing",
+            "target": "Mirai-greip_flood",
+            "similarity": 0.21070951331904722
+        },
+        {
+            "source": "DNS_Spoofing",
+            "target": "Recon-OSScan",
+            "similarity": 0.9999048504909265
+        },
+        {
+            "source": "Mirai-greip_flood",
+            "target": "Recon-OSScan",
+            "similarity": 0.21192829441775593
+        }
+    ]
+}]
