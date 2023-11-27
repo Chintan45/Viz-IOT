@@ -34,7 +34,7 @@ export default function RadarChart3(props){
     fetchRadarData()
   },[])
 
-  const colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b"];
+  const colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2","#7f7f7f","#bcbd22"];
   const colorScheme = () => {
     if(attacks.length == 0) return colors.slice(0, 2)
     // else if (attacks.length >= colors.length) return colors.slice(0, colors.length)
