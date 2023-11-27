@@ -114,7 +114,7 @@ const ScatterPlot = (props) => {
         .enter()
         .append("g")
         .attr("class", "legend")
-        .attr("transform", (d, i) => `translate(${width - 200},${i * 30})`); // Adjusted legend position
+        .attr("transform", (d, i) => `translate(${width - 200},${i * 20})`); // Adjusted legend position
 
       legend
         .append("rect")
