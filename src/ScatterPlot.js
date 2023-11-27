@@ -90,22 +90,66 @@ const ScatterPlot = (props) => {
         .text("Total Size");
 
       // Add scatter plot points
+      // filteredData.forEach((dataset, i) => {
+      //   svg
+      //     .selectAll(`circle-${i}`)
+      //     .data(dataset.Duration)
+      //     .enter()
+      //     .append("circle")
+      //     .attr("cx", (d) => xScale(d))
+      //     .attr("cy", (d, j) => yScale(dataset["Tot size"][j]))
+      //     .attr("r", 5)
+      //     .attr("fill", colorScale(dataset.label))
+      //     .append("title")
+      //     .text(
+      //       (d, j) =>
+      //         `${dataset.label}: Duration=${d}, Tot Size=${dataset["Tot size"][j]}`
+      //     );
+      // });
+
       filteredData.forEach((dataset, i) => {
+        let tot_size;
         svg
           .selectAll(`circle-${i}`)
           .data(dataset.Duration)
           .enter()
           .append("circle")
           .attr("cx", (d) => xScale(d))
-          .attr("cy", (d, j) => yScale(dataset["Tot size"][j]))
+          .attr("cy", (d, j) => {
+            tot_size = dataset["Tot size"][j];
+            return yScale(dataset["Tot size"][j]);
+          })
           .attr("r", 5)
           .attr("fill", colorScale(dataset.label))
+          .on("mouseover", function (event, d, j) {
+            // Show tooltip on mouseover
+            const tooltip = d3.select("#tooltip");
+            tooltip
+              .html(
+                `<strong>${dataset.label}</strong><br/>Tot Size: ${tot_size}<br/>Duration: ${d}`
+              )
+              .style("left", event.pageX + "px")
+              .style("top", event.pageY - 28 + "px")
+              .style("opacity", 0.7);
+          })
+          .on("mouseout", function () {
+            // Hide tooltip on mouseout
+            const tooltip = d3.select("#tooltip");
+            tooltip.style("opacity", 0);
+          })
           .append("title")
           .text(
             (d, j) =>
               `${dataset.label}: Duration=${d}, Tot Size=${dataset["Tot size"][j]}`
           );
       });
+
+      const tooltipContainer = d3
+        .select("body")
+        .append("div")
+        .attr("id", "tooltip")
+        .style("opacity", 0)
+        .attr("class", "tooltip");
 
       // Add legend
       const legend = svg
