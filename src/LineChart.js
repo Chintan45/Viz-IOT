@@ -82,7 +82,7 @@ export default function LinePlot(props) {
         .attr("class", "legend")
         .attr(
           "transform",
-          (d, i) => `translate(${width - 220},${i * 30 + 200})`
+          (d, i) => `translate(${width - 220},${i * 20 + 200})`
         ); // Adjusted the legend position
 
       legend
